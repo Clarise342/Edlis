@@ -2,7 +2,6 @@
 #coding: utf-8
 
 import discord
-import edlis_sub, edlis_third
 from discord.ext import commands, tasks
 from datetime import datetime
 
@@ -11,8 +10,6 @@ class GeneralSystem(commands.Cog):
   def __init__(self, bot):
     self.bot = bot
     self.bot.remove_command("help")
-    self.esc = edlis_sub.Commands()
-    self.etc = edlis_third.Commands()
     self.startstime = datetime.now()
     self.vaid = 0
     self.activity.start()
@@ -36,31 +33,6 @@ class GeneralSystem(commands.Cog):
     e.add_field(name="⚠️ 導入について",value="`EdlisはEDS専用BOTの為、他のサーバーへの導入を許可していません`")
     e.set_author(name=f"To {ctx.author.display_name}",icon_url=ctx.author.avatar_url)
     e.set_footer(text="ヒント｜e:cmdhでコマンドの詳細を確認できます…")
-    return await ctx.send(embed=e)
-    
-  @commands.command(aliases=["cmdh"])
-  async def commandhelp(self, ctx, name, group=None):
-    if group not in [None, "-m", "-g", "-r", "-c"]:
-      return await ctx.send("その実装記号に該当するグループは存在しないようです",delete_after=5.0)
-    gcv = {None:None, "-m":"member", "-g":"guild", "-r":"role"}
-    dcv = {None:"", "-m":"`Member.`", "-g":"`Guild.`", "-r":"`Role.`"}
-    if group in [None, "-m", "-g"]:
-      d = self.esc.get_help(name, gcv[group])
-    elif group in ["-r", "-c"]:
-      d = self.etc.get_help(name, gcv[group])
-    n = "\n".join(d["note"])
-    a = " / ".join(d["aliases"])
-    e = discord.Embed(title=f"コマンドのヘルプ ℹ️")
-    e.add_field(name="❖ コマンド名",value=f"{dcv[group]}**{d['name']}**",inline=False)
-    e.add_field(name="◆ コマンドの説明",value=f'`{d["description"]}`')
-    e.add_field(name="☆ 使い方",value=f"```python\n{d['usage']}\n```")
-    e.add_field(name="○ エイリアス",value=f'`{a}`')
-    e.add_field(name="◇ 必要権限",value=f"`{d['permissions']}`")
-    e.add_field(name="🗒 注釈",value=n)
-    if d["example"] != None:
-      e.add_field(name="➡️ 実行例",value=f'```python\n{d["example"]}\n```')
-    e.set_author(name=f"To {ctx.author.display_name}",icon_url=ctx.author.avatar_url)
-    e.set_footer(text="ヒント｜{}は必須要素、[]は任意要素です")
     return await ctx.send(embed=e)
    
   @commands.command(aliases=["anuc"])
