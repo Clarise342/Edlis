@@ -35,4 +35,4 @@ class Edlis(commands.Bot):
 if __name__ == "__main__":
   bot = Edlis(command_prefix="e:")
   
-  bot.run('TOKEN')
+  bot.run(token)
