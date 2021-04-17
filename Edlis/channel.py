@@ -88,7 +88,7 @@ class ChannelSystem(commands.Cog):
     return await ctx.send(embed=e)
     
   @channel.command(aliases=["crat"])
-  @commands.has_permissions(manage_channels)
+  @commands.has_permissions(manage_channels=True)
   async def create(self, ctx, n, t, c:discord.CategoryChannel=None, r=None):
     await ctx.message.edit(delete_after=5.0)
     if c == None:
