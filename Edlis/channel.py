@@ -39,7 +39,23 @@ class Position(commands.Converter):
         pos = res.position
       else: pos = arg
     return pos
-
+  
+  
+class Target(commands.Converter):
+  async def convert(self, ctx, argument]:
+    try:
+      arg = int(argument)
+    except:
+      if "<" ame ">" in argument:
+        arg = int(argument.strip("<@&>"))
+        res = discord.utils.find(lambda r: r.id == arg, ctx.guild.roles)
+        if res == None:
+          res = discord.utils.find(lambda m: m.id == arg, ctx.guild.members)
+      else:
+        arg = argument
+        res = discord.utils.find(lambda r: r.name == arg, ctx.guild.roles
+        if res == None:
+          res = discord.utils.find(lambda m: m.name == arg, ctx.guild.members)
 
 class ChannelSystem(commands.Cog):
   
@@ -141,9 +157,10 @@ class ChannelSystem(commands.Cog):
     
   @channel.command(aliases=["chpr"])
   @commands.has_permissions(manage_guild=True)
-  async def changepermission(self, ctx, c:AChannel, opt, p, r=None):
+  async def changepermission(self, ctx, c:AChannel, t, opt, p, r=None):
     await ctx.message.edit(delete_after=5.0)
     o = True if opt == "add" else False
+    dp = c.overwrites
     prm = p.split(",")
     for p in prm:
       if p == "03": dp.update(manage_permissions=o)
@@ -186,7 +203,7 @@ class ChannelSystem(commands.Cog):
   @channel.command(aliases=[pblc])
   async def public(self, ctx, c:AChannel, r=None):
     await ctx.message.edit(delete_after=5.0)
-    if a == 0:
+    
     
 
 def setup(bot):
