@@ -176,5 +176,17 @@ class ChannelSystem(commands.Cog):
     await c.edit(overwrites=dp, reason=None)
     return await ctx.send(f"☑️ チャンネル '{c.name}' の権限を変更しました",delete_after=10.0)
 
+  @channel.command(aliases=["arcv"])
+  async def archive(self, ctx, c:AChannel, r=None):
+    await ctx.message.edit(delete_after=5.0)
+    cc = ctx.guild.get_channel(769864008890580992)
+    await c.edit(category=cc, position=0, reason=r)
+    return await ctx.send(f"☑️ チャンネル '{c.name}' をアーカイブへ移動しました",delete_after=10.0)
+  
+  @channel.command(aliases=[pblc])
+  async def public(self, ctx, c:AChannel, r=None):
+    await ctx.message.edit(delete_after=5.0)
+    
+
 def setup(bot):
   bot.add_cog(ChannelSystem(bot))
