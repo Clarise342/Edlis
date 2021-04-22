@@ -186,6 +186,7 @@ class ChannelSystem(commands.Cog):
   @channel.command(aliases=[pblc])
   async def public(self, ctx, c:AChannel, r=None):
     await ctx.message.edit(delete_after=5.0)
+    if a == 0:
     
 
 def setup(bot):
