@@ -147,7 +147,7 @@ class ChannelSystem(commands.Cog):
     prm = p.split(",")
     for p in prm:
       if p == "03": dp.update(manage_permissions=o)
-			elif p == "04": dp.update(manage_channels=o)
+      elif p == "04": dp.update(manage_channels=o)
       elif p == "20": dp.update(view_channel=o)
       if type(c) == discord.TextChannel:
         if p == "05": dp.update(manage_messages=o)
