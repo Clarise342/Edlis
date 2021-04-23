@@ -205,7 +205,7 @@ class ChannelSystem(commands.Cog):
     await c.edit(category=cc, position=0, reason=r)
     return await ctx.send(f"☑️ チャンネル '{c.name}' をアーカイブへ移動しました",delete_after=10.0)
   
-  @channel.command(aliases=[pblc])
+  @channel.command(aliases=["pblc"])
   async def public(self, ctx, c:AChannel, r=None):
     await ctx.message.edit(delete_after=5.0)
     
