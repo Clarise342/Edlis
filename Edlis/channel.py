@@ -46,7 +46,7 @@ class Target(commands.Converter):
     try:
       arg = int(argument)
     except:
-      if "<" ame ">" in argument:
+      if "<" and ">" in argument:
         arg = int(argument.strip("<@&>"))
         res = discord.utils.find(lambda r: r.id == arg, ctx.guild.roles)
         if res == None:
