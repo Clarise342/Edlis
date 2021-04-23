@@ -42,7 +42,7 @@ class Position(commands.Converter):
   
   
 class Target(commands.Converter):
-  async def convert(self, ctx, argument]:
+  async def convert(self, ctx, argument):
     try:
       arg = int(argument)
     except:
@@ -53,9 +53,14 @@ class Target(commands.Converter):
           res = discord.utils.find(lambda m: m.id == arg, ctx.guild.members)
       else:
         arg = argument
-        res = discord.utils.find(lambda r: r.name == arg, ctx.guild.roles
-        if res == None:
-          res = discord.utils.find(lambda m: m.name == arg, ctx.guild.members)
+        res = discord.utils.find(lambda r: r.name == arg, ctx.guild.roles)
+        if res == None: res = discord.utils.find(lambda m: m.name == arg, ctx.guild.members)
+        if res == None: res = discord.utils.find(lambda m: m.display_name == arg, ctx.guild.members)
+    else:
+      res = discord.utils.find(lambda r: r.id == arg, ctx.guild.roles)
+      if res == None:
+        res = discord.utils.find(lambda m: m.id == arg, ctx.guild.members)
+    return res
 
 class ChannelSystem(commands.Cog):
   
