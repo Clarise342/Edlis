@@ -166,8 +166,11 @@ class ChannelSystem(commands.Cog):
     await ctx.message.edit(delete_after=5.0)
     o = True if opt == "add" else False
     dp = c.overwrites
+    r = ctx.guild.get_role(785137663123914763)
+    print(dp)
     print(type(dp))
-    prm = p.split(",")
+    print(r in dp)
+r    prm = p.split(",")
     for p in prm:
       if p == "03": dp.update(manage_permissions=o)
       elif p == "04": dp.update(manage_channels=o)
