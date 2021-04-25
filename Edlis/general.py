@@ -21,7 +21,7 @@ class GeneralSystem(commands.Cog):
   async def commandslist(self, ctx):
     cmds = [
       "help`(cmdl)`", "commandhelp`(cmdh)` {`コマンド名`} [`実装記号`]",
-      "announce`(anus)` {`内容`}",
+      "announce`(anus)` {`内容`}", "permissionslist`(prml)`",
       "member`(m)` {`コマンド`}", "guild`(g)` {`コマンド`}",
       "role`(r)` {`コマンド`}"
     ]
@@ -44,6 +44,54 @@ class GeneralSystem(commands.Cog):
     e.set_thumbnail(url=ctx.author.avatar_url)
     ch = ctx.guild.get_channel(716137636296654889)
     await ch.send(embed=e)
+    
+  @commands.command(aliases=["prml"])
+  async def permissionslist(self, ctx):
+    pl = {
+      "28": "`リアクションを追加`",
+      "00": "`管理者`",
+      "26": "`ファイルを添付`",
+      "11": "`メンバーをBAN`",
+      "18": "`ニックネームを変更`",
+      "30": "`ボイスチャンネルに接続`",
+      "19": "`招待を作成`",
+      '14': "`メンバーをスピーカーミュート`",
+      "27": "`埋め込みリンク`",
+      '29': "`外部の絵文字を使用`",
+      '12': "`メンバーをKick`",
+      "04": "`チャンネルを管理`",
+      '06': "`絵文字を管理`",
+      '01': "`サーバーを管理`",
+      '05': "`メッセージを管理`",
+      '07': "`ニックネームを管理`",
+      '03': "`権限を管理`",
+      '02': "`役職を管理`",
+      '08': "`ウェブフックを管理`",
+      '17': "`@everyoneにメンション`",
+      '15': "`メンバーを移動`",
+      '13': "`メンバーをミュート`",
+      '16': "`優先スピーカー`",
+      '22': "`メッセージ履歴を読む`",
+      '21': "`メッセージを読む`",
+      '23': "`メッセージを送信`",
+      '24': "`TTSメッセージを送信`",
+      '25': "`スラッシュコマンドを使用`",
+      '31': "`ボイスチャンネルで発言`",
+      '32': "`ボイスチャンネルで配信`",
+      '28': "`外部の絵文字を使用`",
+      '33': "`音声検出を使用`",
+      '09': "`監査ログを表示`",
+      '20': "`チャンネルを見る`",
+      '10': "`サーバーインサイトを見る`"
+    }
+    psl, el, e = sorted(pl), [], discord.Embed(title=f"権限と指定値(権限値)のリスト (全 {len(pl)} 種)")
+    for l in psl:
+      e.add_field(name=l, value=pl[l], inline=False)
+      if len(e.fields) == 8:
+        el.append(e)
+        e = discord.Embed(title=f"権限と指定値(権限値)のリスト (全 {len(pl)} 種)")
+      
+      
     
   @tasks.loop(seconds=60)
   async def activity(self):
