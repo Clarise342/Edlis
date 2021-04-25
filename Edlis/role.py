@@ -52,16 +52,16 @@ class RoleSystem(commands.Cog):
   async def permissions(self, ctx, r:discord.Role, page:int=1):
     prs = [x[0] for x in r.permissions if x[1] == True]
     perms_dict = {
-      'add_reactions':        "27: `リアクションを追加`",
+      'add_reactions':        "28: `リアクションを追加`",
       'administrator':        "00: `管理者`",
-      'attach_files':         "25: `ファイルを添付`",
+      'attach_files':         "26: `ファイルを添付`",
       'ban_members':          "11: `メンバーをBAN`",
       'change_nickname':      "18: `ニックネームを変更`",
-      'connect':              "29: `ボイスチャンネルに接続`",
+      'connect':              "30: `ボイスチャンネルに接続`",
       'create_instant_invite':"19: `招待を作成`",
       'deafen_members':       "14: `メンバーをスピーカーミュート`",
-      'embed_links':          "26: `埋め込みリンク`",
-      'external_emojis':      "28: `外部の絵文字を使用`",
+      'embed_links':          "27: `埋め込みリンク`",
+      'external_emojis':      "29: `外部の絵文字を使用`",
       'kick_members':         "12: `メンバーをKick`",
       'manage_channels':      "04: `チャンネルを管理`",
       'manage_emojis':        "06: `絵文字を管理`",
@@ -79,10 +79,11 @@ class RoleSystem(commands.Cog):
       'read_messages':        "21: `メッセージを読む`",
       'send_messages':        "23: `メッセージを送信`",
       'send_tts_messages':    "24: `TTSメッセージを送信`",
-      'speak':                "30: `ボイスチャンネルで発言`",
-      'stream':               "31: `ボイスチャンネルで配信`",
+      'use_slash_commands':   "25: `スラッシュコマンドを使用`",
+      'speak':                "31: `ボイスチャンネルで発言`",
+      'stream':               "32: `ボイスチャンネルで配信`",
       'use_external_emojis':  "28: `外部の絵文字を使用`",
-      'use_voice_activation': "32: `音声検出を使用`",
+      'use_voice_activation': "33: `音声検出を使用`",
       'view_audit_log':       "09: `監査ログを表示`",
       'view_channel':         "20: `チャンネルを見る`",
       'view_guild_insights':  "10: `サーバーインサイトを見る`"
@@ -160,14 +161,15 @@ class RoleSystem(commands.Cog):
         elif p == "22": dp.update(read_message_history=True)
         elif p == "23": dp.update(send_messages=True)
         elif p == "24": dp.update(send_tts_messages=True)
-        elif p == "25": dp.update(attach_files=True)
-        elif p == "26": dp.update(embed_links=True)
-        elif p == "27": dp.update(add_reactions=True)
-        elif p == "28": dp.update(use_external_emojis=True)
-        elif p == "29": dp.update(connect=True)
-        elif p == "30": dp.update(speak=True)
-        elif p == "31": dp.update(stream=True)
-        elif p == "32": dp.update(use_voice_activation=True)
+        elif p == "25": dp.update(use_slash_commands=True)
+        elif p == "26": dp.update(attach_files=True)
+        elif p == "27": dp.update(embed_links=True)
+        elif p == "28": dp.update(add_reactions=True)
+        elif p == "29": dp.update(use_external_emojis=True)
+        elif p == "30": dp.update(connect=True)
+        elif p == "31": dp.update(speak=True)
+        elif p == "32": dp.update(stream=True)
+        elif p == "33": dp.update(use_voice_activation=True)
         else: pass
       r = await ctx.guild.create_role(name=name, permissions=dp, reason=reason)
     return await ctx.send(f"☑️ ロール '{r.name}' を作成しました`(id: {r.id})`")
@@ -235,14 +237,15 @@ class RoleSystem(commands.Cog):
       elif p == "22": dp.update(read_message_history=o)
       elif p == "23": dp.update(send_messages=o)
       elif p == "24": dp.update(send_tts_messages=o)
-      elif p == "25": dp.update(attach_files=o)
-      elif p == "26": dp.update(embed_links=o)
-      elif p == "27": dp.update(add_reactions=o)
-      elif p == "28": dp.update(use_external_emojis=o)
-      elif p == "29": dp.update(connect=o)
-      elif p == "30": dp.update(speak=o)
-      elif p == "31": dp.update(stream=o)
-      elif p == "32": dp.update(use_voice_activation=o)
+      elif p == "25": dp.update(use_slash_commands=o)
+      elif p == "26": dp.update(attach_files=o)
+      elif p == "27": dp.update(embed_links=o)
+      elif p == "28": dp.update(add_reactions=o)
+      elif p == "29": dp.update(use_external_emojis=o)
+      elif p == "30": dp.update(connect=o)
+      elif p == "31": dp.update(speak=o)
+      elif p == "32": dp.update(stream=o)
+      elif p == "33": dp.update(use_voice_activation=o)
       else: pass
     await r.edit(permissions=dp, reason=reason)
     return await ctx.send(f"☑️ ロール '{r.name}' の権限設定を変更しました",delete_after=10.0)
