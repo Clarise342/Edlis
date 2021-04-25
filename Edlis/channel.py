@@ -170,7 +170,7 @@ class ChannelSystem(commands.Cog):
     print(dp)
     print(type(dp))
     print(r in dp)
-r    prm = p.split(",")
+    prm = p.split(",")
     for p in prm:
       if p == "03": dp.update(manage_permissions=o)
       elif p == "04": dp.update(manage_channels=o)
