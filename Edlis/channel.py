@@ -162,44 +162,41 @@ class ChannelSystem(commands.Cog):
     
   @channel.command(aliases=["chpr"])
   @commands.has_permissions(manage_guild=True)
-  async def changepermission(self, ctx, c:AChannel, t, opt, p, r=None):
+  async def changepermission(self, ctx, c:AChannel, t:Target, opt, p, r=None):
     await ctx.message.edit(delete_after=5.0)
     o = True if opt == "add" else False
-    dp = c.overwrites
-    r = ctx.guild.get_role(785137663123914763)
-    print(dp)
-    print(type(dp))
-    print(r in dp)
+    cps = c.overwrites
+    po = cps[t] if t in cps else [cps[x] for x in cps if x.name == "@everyone"][0]
     prm = p.split(",")
     for p in prm:
-      if p == "03": dp.update(manage_permissions=o)
-      elif p == "04": dp.update(manage_channels=o)
-      elif p == "20": dp.update(view_channel=o)
+      if p == "03": po.update(manage_permissions=o)
+      elif p == "04": po.update(manage_channels=o)
+      elif p == "20": po.update(view_channel=o)
       if type(c) == discord.TextChannel:
-        if p == "05": dp.update(manage_messages=o)
-        elif p == "08": dp.update(manage_webhooks=o)
-        elif p == "17": dp.update(mention_everyone=o)
-        elif p == "19": dp.update(create_instant_invite=o)
-        elif p == "21": dp.update(read_messages=o)
-        elif p == "22": dp.update(read_message_history=o)
-        elif p == "23": dp.update(send_messages=o)
-        elif p == "24": dp.update(send_tts_messages=o)
-        elif p == "25": dp.update(attach_files=o)
-        elif p == "26": dp.update(embed_links=o)
-        elif p == "27": dp.update(add_reactions=o)
-        elif p == "28": dp.update(use_external_emojis=o)
+        if p == "05": po.update(manage_messages=o)
+        elif p == "08": po.update(manage_webhooks=o)
+        elif p == "17": po.update(mention_everyone=o)
+        elif p == "19": po.update(create_instant_invite=o)
+        elif p == "21": po.update(read_messages=o)
+        elif p == "22": po.update(read_message_history=o)
+        elif p == "23": po.update(send_messages=o)
+        elif p == "24": po.update(send_tts_messages=o)
+        elif p == "25": po.update(attach_files=o)
+        elif p == "26": po.update(embed_links=o)
+        elif p == "27": po.update(add_reactions=o)
+        elif p == "28": po.update(use_external_emojis=o)
         else: pass
       elif type(c) == discord.VoiceChannel:
-        if p == "13": dp.update(mute_members=o)
-        elif p == "14": dp.update(deafen_members=o)
-        elif p == "15": dp.update(move_members=o)
-        elif p == "16": dp.update(priority_speaker=o)
-        elif p == "29": dp.update(connect=o)
-        elif p == "30": dp.update(speak=o)
-        elif p == "31": dp.update(stream=o)
-        elif p == "32": dp.update(use_voice_activation=o)
+        if p == "13": po.update(mute_members=o)
+        elif p == "14": po.update(deafen_members=o)
+        elif p == "15": po.update(move_members=o)
+        elif p == "16": po.update(priority_speaker=o)
+        elif p == "29": po.update(connect=o)
+        elif p == "30": po.update(speak=o)
+        elif p == "31": po.update(stream=o)
+        elif p == "32": po.update(use_voice_activation=o)
         else: pass
-    await c.edit(overwrites=dp, reason=None)
+    await c.set_permissions(t, overwrite=po, reason=r)
     return await ctx.send(f"☑️ チャンネル '{c.name}' の権限を変更しました",delete_after=10.0)
 
   @channel.command(aliases=["arcv"])
