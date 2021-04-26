@@ -46,7 +46,7 @@ class GeneralSystem(commands.Cog):
     await ch.send(embed=e)
     
   @commands.command(aliases=["prml"])
-  async def permissionslist(self, ctx):
+  async def permissionslist(self, ctx, page:int=1):
     pl = {
       "28": "`リアクションを追加`",
       "00": "`管理者`",
@@ -88,9 +88,14 @@ class GeneralSystem(commands.Cog):
     for l in psl:
       e.add_field(name=l, value=pl[l], inline=False)
       if len(e.fields) == 8:
+        e.set_footer(text=f"権限値は権限を付与・剥奪する際に使用します\n現在表示しているページは {len(el)+1} ページです")
+        e.set_author(name=f"To {ctx.author.display_name}",icon_url=ctx.author.avatar_url)
         el.append(e)
-        e = discord.Embed(title=f"権限と指定値(権限値)のリスト (全 {len(pl)} 種)")
-      
+    if len(el) * 8 < len(psl):
+      e.set_footer(text=f"権限値は権限を付与・剥奪する際に使用します\n現在表示しているページは {len(el)+1} ページです")
+      e.set_author(name=f"To {ctx.author.display_name}",icon_url=ctx.author.avatar_url)
+      el.append(e)
+    return await ctx.send(embed=el[page-1])
       
     
   @tasks.loop(seconds=60)
