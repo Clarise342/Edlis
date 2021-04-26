@@ -91,6 +91,7 @@ class GeneralSystem(commands.Cog):
         e.set_footer(text=f"権限値は権限を付与・剥奪する際に使用します\n現在表示しているページは {len(el)+1} ページです")
         e.set_author(name=f"To {ctx.author.display_name}",icon_url=ctx.author.avatar_url)
         el.append(e)
+        e = discord.Embed(title=f"権限と指定値(権限値)のリスト (全 {len(pl)} 種)")
     if len(el) * 8 < len(psl):
       e.set_footer(text=f"権限値は権限を付与・剥奪する際に使用します\n現在表示しているページは {len(el)+1} ページです")
       e.set_author(name=f"To {ctx.author.display_name}",icon_url=ctx.author.avatar_url)
