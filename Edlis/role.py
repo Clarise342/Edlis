@@ -84,6 +84,7 @@ class RoleSystem(commands.Cog):
       'stream':               "32: `ボイスチャンネルで配信`",
       'use_external_emojis':  "28: `外部の絵文字を使用`",
       'use_voice_activation': "33: `音声検出を使用`",
+      'request_to_speak':     "34: `リクエストトゥスピーク`",
       'view_audit_log':       "09: `監査ログを表示`",
       'view_channel':         "20: `チャンネルを見る`",
       'view_guild_insights':  "10: `サーバーインサイトを見る`"
@@ -139,7 +140,6 @@ class RoleSystem(commands.Cog):
         if p == "00": dp.update(administrator=True)
         elif p == "01": dp.update(manage_guild=True)
         elif p == "02": dp.update(manage_roles=True)
-        elif p == "03": dp.update(manage_permissions=True)
         elif p == "04": dp.update(manage_channels=True)
         elif p == "05": dp.update(manage_messages=True)
         elif p == "06": dp.update(manage_emojis=True)
@@ -170,6 +170,7 @@ class RoleSystem(commands.Cog):
         elif p == "31": dp.update(speak=True)
         elif p == "32": dp.update(stream=True)
         elif p == "33": dp.update(use_voice_activation=True)
+        elif p == "34": dp.update(request_to_speak=True}
         else: pass
       r = await ctx.guild.create_role(name=name, permissions=dp, reason=reason)
     return await ctx.send(f"☑️ ロール '{r.name}' を作成しました`(id: {r.id})`")
@@ -215,7 +216,6 @@ class RoleSystem(commands.Cog):
       if p == "00": dp.update(administrator=o)
       elif p == "01": dp.update(manage_guild=o)
       elif p == "02": dp.update(manage_roles=o)
-      elif p == "03": dp.update(manage_permissions=o)
       elif p == "04": dp.update(manage_channels=o)
       elif p == "05": dp.update(manage_messages=o)
       elif p == "06": dp.update(manage_emojis=o)
@@ -246,6 +246,7 @@ class RoleSystem(commands.Cog):
       elif p == "31": dp.update(speak=o)
       elif p == "32": dp.update(stream=o)
       elif p == "33": dp.update(use_voice_activation=o)
+      elif p == "34": dp.update(request_to_speak=o)
       else: pass
     await r.edit(permissions=dp, reason=reason)
     return await ctx.send(f"☑️ ロール '{r.name}' の権限設定を変更しました",delete_after=10.0)
