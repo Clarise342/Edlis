@@ -170,7 +170,7 @@ class RoleSystem(commands.Cog):
         elif p == "31": dp.update(speak=True)
         elif p == "32": dp.update(stream=True)
         elif p == "33": dp.update(use_voice_activation=True)
-        elif p == "34": dp.update(request_to_speak=True}
+        elif p == "34": dp.update(request_to_speak=True)
         else: pass
       r = await ctx.guild.create_role(name=name, permissions=dp, reason=reason)
     return await ctx.send(f"☑️ ロール '{r.name}' を作成しました`(id: {r.id})`")
