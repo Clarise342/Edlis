@@ -202,6 +202,7 @@ class ChannelSystem(commands.Cog):
     return await ctx.send(f"☑️ チャンネル '{c.name}' の権限を変更しました",delete_after=10.0)
 
   @channel.command(aliases=["arcv"])
+  @commands.has_permissions(manage_channels=True)
   async def archive(self, ctx, c:AChannel, r=None):
     await ctx.message.edit(delete_after=5.0)
     cc = ctx.guild.get_channel(769864008890580992)
