@@ -231,14 +231,14 @@ class ChannelSystem(commands.Cog):
     po = [pl[x] for x in pl if x.name == "@everyone"][0]
     po.update(view_channel=False)
     r = [x for x in ctx.guild.roles if x.name == "@everyone"][0]
-    c.set_permissions(r, overwrite=po)
+    await c.set_permissions(r, overwrite=po)
     if len(ts) > 0:
       for t in ts:
         po = [pl[x] for x in pl if x.name == t.name]
         if len(po) > 0: p = po[0]
         else: p = discord.PermissionOverwrite()
-        p.update(view_channel=True)
-        c.set_permissions(t, overwrite=p)
+        p.update(view_channel=False)
+        await c.set_permissions(t, overwrite=p)
     return await ctx.send(f"☑️ チャンネル '{c.name}' をプライベート化しました",delete_after=10.0)
            
 
