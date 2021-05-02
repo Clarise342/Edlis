@@ -207,13 +207,40 @@ class ChannelSystem(commands.Cog):
     await ctx.message.edit(delete_after=5.0)
     cc = ctx.guild.get_channel(769864008890580992)
     await c.edit(category=cc, position=0, reason=r)
+    cl = c.overwrites
+    po = [pl[x] for x in pl if x.name == "@everyone"][0]
+    po.update(send_messages=False)
+    r = [x for x in ctx.guild.roles x.name == "@everyone"][0]
+    c.set_permissions(r, overwrite=po, reason=r)
     return await ctx.send(f"☑️ チャンネル '{c.name}' をアーカイブへ移動しました",delete_after=10.0)
   
   @channel.command(aliases=["pblc"])
   async def public(self, ctx, c:AChannel, r=None):
     await ctx.message.edit(delete_after=5.0)
-    
-    
+    pl = c.overwrites
+    po = [pl[x] for x in pl if x.name == "@everyone"][0]
+    po.update(view_channel=True)
+    r = [x for x in ctx.guild.roles if x.name == "@everyone"][0]
+    c.set_permissions(r, overwrite=po, reason=r)
+    return await ctx.send(f"☑️ チャンネル '{c.name}' をパブリック化しました",delete_after=10.0)
+  
+  @channel.command(aliases=["prvt"])
+  async def private(self, ctx, c:AChannel, *ts:Target):
+    await ctx.message.edit(delete_after=5.0)
+    pl = c.overwrites
+    po = [pl[x] for x in pl if x.name == "@everyone"][0]
+    po.update(view_channel=False)
+    r = [x for x in ctx.guild.roles if x.name == "@everyone"][0]
+    c.set_permissions(r, overwrite=po)
+    if len(ts) > 0:
+      for t in ts:
+        po = [pl[x] for x in pl if x.name == t.name]
+        if len(po) > 0: p = po[0]
+        else: p = discord.PermissionOverwrite()
+        p.update(view_channel=True)
+        c.set_permissions(t, overwrite=p)
+    return await ctx.send(f"☑️ チャンネル '{c.name}' をプライベート化しました",delete_after=10.0)
+           
 
 def setup(bot):
   bot.add_cog(ChannelSystem(bot))
