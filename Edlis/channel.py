@@ -210,7 +210,7 @@ class ChannelSystem(commands.Cog):
     cl = c.overwrites
     po = [pl[x] for x in pl if x.name == "@everyone"][0]
     po.update(send_messages=False)
-    r = [x for x in ctx.guild.roles x.name == "@everyone"][0]
+    r = [x for x in ctx.guild.roles if x.name == "@everyone"][0]
     c.set_permissions(r, overwrite=po, reason=r)
     return await ctx.send(f"☑️ チャンネル '{c.name}' をアーカイブへ移動しました",delete_after=10.0)
   
