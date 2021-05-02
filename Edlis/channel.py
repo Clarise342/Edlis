@@ -210,8 +210,8 @@ class ChannelSystem(commands.Cog):
     cl = c.overwrites
     po = [pl[x] for x in pl if x.name == "@everyone"][0]
     po.update(send_messages=False)
-    r = [x for x in ctx.guild.roles if x.name == "@everyone"][0]
-    await c.set_permissions(r, overwrite=po, reason=r)
+    tr = [x for x in ctx.guild.roles if x.name == "@everyone"][0]
+    await c.set_permissions(tr, overwrite=po, reason=r)
     return await ctx.send(f"☑️ チャンネル '{c.name}' をアーカイブへ移動しました",delete_after=10.0)
   
   @channel.command(aliases=["pblc"])
@@ -220,8 +220,8 @@ class ChannelSystem(commands.Cog):
     pl = c.overwrites
     po = [pl[x] for x in pl if x.name == "@everyone"][0]
     po.update(view_channel=True)
-    r = [x for x in ctx.guild.roles if x.name == "@everyone"][0]
-    await c.set_permissions(r, overwrite=po, reason=r)
+    tr = [x for x in ctx.guild.roles if x.name == "@everyone"][0]
+    await c.set_permissions(tr, overwrite=po, reason=r)
     return await ctx.send(f"☑️ チャンネル '{c.name}' をパブリック化しました",delete_after=10.0)
   
   @channel.command(aliases=["prvt"])
