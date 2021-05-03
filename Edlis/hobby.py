@@ -8,7 +8,7 @@ class HobbySystem(commands.Cog):
   def __init__(self, bot):
     self.bot = bot 
     
-  @commands.command(aliases=["h"])
+  @commands.group(aliases=["h"])
   async def hobby(self, ctx):
     if ctx.invoked_subcommand is None:
       return await ctx.send("サブコマンドが必要です\n詳細は`e:hobby commandslist`をご確認ください")
