@@ -20,8 +20,9 @@ class HobbySystem(commands.Cog):
       "say {`メッセージ`}",
       "omikuji",
       "randomint [`下限/上限`]"
-    ].join("\n")
-    e.add_field(name="★ ホビーコマンド一覧",value=fh)
+    ]
+    f = "\n".join(fh)
+    e.add_field(name="★ ホビーコマンド一覧",value=f)
     e.set_footer(text="ヒント｜e:cmdhで詳細を確認できます")
     e.set_author(name=f"To {ctx.author.display_name}",icon_url=ctx.author.avatar_url)
     return await ctx.send(embed=e)
