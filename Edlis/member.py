@@ -31,7 +31,7 @@ class MemberSystem(commands.Cog):
   @commands.group(aliases=["m"])
   async def member(self, ctx):
     if ctx.invoked_subcommand is None:
-      return await ctx.send("サブコマンドが必要です\n詳細は`e:member commandshelp`をご確認ください",delete_after=10.0)
+      return await ctx.send("サブコマンドが必要です\n詳細は`e:member commandslist`をご確認ください",delete_after=10.0)
     
   @member.command(aliases=["cmdl"])
   async def commandslist(self, ctx, page:int=1):
