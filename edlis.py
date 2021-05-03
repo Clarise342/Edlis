@@ -13,7 +13,8 @@ extensions = [
   "Edlis.member",
   "Edlis.guild",
   "Edlis.role",
-  "Edlis.channel"
+  "Edlis.channel",
+  "Edlis.hobby"
 ]
 
 class Edlis(commands.Bot):
