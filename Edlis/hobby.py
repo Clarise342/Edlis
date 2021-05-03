@@ -30,7 +30,7 @@ class HobbySystem(commands.Cog):
   @hobby.command()
   async def say(self, ctx, msg):
     await ctx.message.edit(delete_after=0.01)
-    ch = bot.get_channel(819504951583572009)
+    ch = self.bot.get_channel(819504951583572009)
     e = discord.Embed(title=msg)
     e.set_author(name=f"by {ctx.author.display_name}")
     await ctx.send(msg)
