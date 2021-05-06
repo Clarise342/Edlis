@@ -14,7 +14,8 @@ class GeneralSystem(commands.Cog):
     self.vaid = 0
     self.activity.start()
     self.cl = {
-      "er":0xFFC20E
+      "er":0xFFC20E,
+      "gl":0x739878
     }
     
   @commands.command(aliases=["help","cmdl"])
@@ -26,7 +27,7 @@ class GeneralSystem(commands.Cog):
       "role`(r)` {`コマンド`}"
     ]
     cmds_f = "・" + "\n・".join(cmds)
-    e = discord.Embed(title="Edlisのヘルプ ℹ️")
+    e = discord.Embed(title="Edlisのヘルプ ℹ️",color=self.cl["gl"])
     e.add_field(name="★ 一般コマンド一覧",value=cmds_f)
     e.add_field(name="◇ 開発者",value="Clarice#0920`(536506865883021323)`")
     e.add_field(name="○ その他情報",value="`使用言語 :` Python\n`使用ライブラリ :` discord.py")
@@ -39,7 +40,7 @@ class GeneralSystem(commands.Cog):
   @commands.has_any_role(770880174820163624, 711201258081615912, 723177654362177586)
   async def announce(self, ctx, value):
     await ctx.message.edit(delete_after=1.0)
-    e = discord.Embed(title=value)
+    e = discord.Embed(title=value,color=self.cl["gl"])
     e.set_author(name=f"📢 {ctx.author.display_name}よりアナウンス！")
     e.set_thumbnail(url=ctx.author.avatar_url)
     ch = ctx.guild.get_channel(716137636296654889)
@@ -85,7 +86,7 @@ class GeneralSystem(commands.Cog):
       '10': "`サーバーインサイトを見る`(△ー)",
       '34': "`リクエストトゥスピーク`(▽ス)"
     }
-    psl, el, e = sorted(pl), [], discord.Embed(title=f"権限と指定値(権限値)のリスト (全 {len(pl)} 種)")
+    psl, el, e = sorted(pl), [], discord.Embed(title=f"権限と指定値(権限値)のリスト (全 {len(pl)} 種)",color=self.cl["gl"])
     for l in psl:
       e.add_field(name=l, value=pl[l], inline=False)
       if len(e.fields) == 8:
@@ -99,7 +100,7 @@ class GeneralSystem(commands.Cog):
         e.set_footer(text=f"権限値は権限を付与・剥奪する際に使用します\n現在表示しているページは {len(el)+1} ページです")
         e.set_author(name=f"To {ctx.author.display_name}",icon_url=ctx.author.avatar_url)
         el.append(e)
-        e = discord.Embed(title=f"権限と指定値(権限値)のリスト (全 {len(pl)} 種)")
+        e = discord.Embed(title=f"権限と指定値(権限値)のリスト (全 {len(pl)} 種)",color=self.cl["gl"])
     if len(el) * 8 < len(psl):
       e.add_field(name="注釈",value="○:ロールとチャンネルに適用可\n"
                     "△:ロールにのみ適用可\n"
