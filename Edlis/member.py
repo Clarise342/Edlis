@@ -12,18 +12,15 @@ class MemberSystem(commands.Cog):
   def __init__(self, bot):
     self.bot = bot
     self.cl = {
-      "er":0xFFC20E
+      "er":0xFFC20E,
+      "mb":0xC2F488
     }
     self.overroles = [
       785137663123914763,
-      741638298027556955,
-      776785215087050784,
-      787169630409195591,
-      801109518711783444,
+      835747967217827861,
       795277929000730644,
       741637203045908480,
-      723177654362177586,
-      711201258081615912,
+      835837877794897970,
       770880174820163624
     ]
     
@@ -35,7 +32,7 @@ class MemberSystem(commands.Cog):
     
   @member.command(aliases=["cmdl"])
   async def commandslist(self, ctx, page:int=1):
-    e = discord.Embed(title="Edlisのヘルプ ℹ️")
+    e = discord.Embed(title="Edlisのヘルプ ℹ️",color=self.cl["mb"])
     fc = [
       [
         "commandslist`(cmdl)` [`ページ`]",
@@ -55,14 +52,14 @@ class MemberSystem(commands.Cog):
       [
         "removerole`(rmrl)` {`役職名・ID`}\n     [`メンバー名・ID`] [`理由`]",
         "mute {`メンバー名・ID`} [`理由`]",
-        "warn {`メンバー名・ID`} {`警告レベル`} [`理由`]",
+        "warn {`メンバー名・ID`} [`理由`]",
         "kick {`メンバー名・ID`} [`理由`]",
         "ban {`メンバー名・ID`} [`メッセージ削除日数`]\n    [`理由`]",
         "unmute`(unmt)` {`メンバー名・ID`} [`理由`]",
         "unwarn`(unwn)` {`メンバー名・ID`} [`理由`]",
         "unban`(unbn)` {`ユーザーID`} [`理由`]",
         "vip {`メンバー名・ID`} {`VIPレベル`} [`理由`]",
-        "admin`(admn)` {`メンバー名・ID`} {`権限レベル`}\n    [`理由`]",
+        "admin`(admn)` {`メンバー名・ID`} [`理由`]",
         "unvip`(uvip)` {`メンバー名・ID`} [`理由`]",
         "unadmin`(uadm)` {`メンバー名・ID`} [`理由`]"
       ]
@@ -76,7 +73,7 @@ class MemberSystem(commands.Cog):
   @member.command()
   async def info(self, ctx, member:discord.Member=None):
     if member == None: member = ctx.author
-    e = discord.Embed(title="メンバーの基本情報 📄")
+    e = discord.Embed(title="メンバーの基本情報 📄",color=self.cl["mb"])
     bb = {False:"このメンバーはBotではありません",True:"このメンバーはBotです"}[member.bot]
     fdm = {
       "❖ メンバー名":member.display_name,
