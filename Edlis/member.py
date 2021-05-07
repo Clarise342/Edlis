@@ -92,7 +92,7 @@ class MemberSystem(commands.Cog):
   @member.command(aliases=["avtr"])
   async def avatar(self, ctx, member:discord.Member=None):
     if member == None: member = ctx.author
-    e = discord.Embed(title="メンバーのアバター画像 👤")
+    e = discord.Embed(title="メンバーのアバター画像 👤",color=self.cl["mb"])
     e.set_image(url=member.avatar_url)
     e.set_author(name=f"To {ctx.author.display_name}",icon_url=ctx.author.avatar_url)
     return await ctx.send(embed=e)
@@ -105,13 +105,13 @@ class MemberSystem(commands.Cog):
     for r in roles_n:
       rs.append(r)
       if len(rs) == 10:
-        e = discord.Embed(title=f"{member.display_name}さんのロール一覧 📒")
+        e = discord.Embed(title=f"{member.display_name}さんのロール一覧 📒",color=self.cl["mb"])
         v = "**@" + "**\n**@".join(rs) + "**"
         e.add_field(name=f"❖ ロール数 : {len(roles)}",value=v)
         es.append(e)
         rs = []
     if len(rs) > 0:
-      e = discord.Embed(title=f"{member.display_name}さんのロール一覧 📒")
+      e = discord.Embed(title=f"{member.display_name}さんのロール一覧 📒",color=self.cl["mb"])
       v = "**@" + "**\n**@".join(rs) + "**"
       e.add_field(name=f"❖ ロール数 : {len(roles)}",value=v)
       es.append(e)
@@ -129,13 +129,13 @@ class MemberSystem(commands.Cog):
     for a in aces:
       ss.append(a)
       if len(ss) == 10:
-        e = discord.Embed(title=f"{member.display_name}さんの接続可能なチャンネル一覧 📒")
+        e = discord.Embed(title=f"{member.display_name}さんの接続可能なチャンネル一覧 📒",color=self.cl["mb"])
         v = "#" + "\n#".join(ss)
         e.add_field(name=f"❖ チャンネル数 : {len(aces)}",value=v)
         es.append(e)
         ss = []
     if len(ss) > 0:
-      e = discord.Embed(title=f"{member.display_name}さんの接続可能なチャンネル一覧 📒")
+      e = discord.Embed(title=f"{member.display_name}さんの接続可能なチャンネル一覧 📒",color=self.cl["mb"])
       v = "#" + "\n#".join(ss)
       e.add_field(name=f"❖ チャンネル数 : {len(aces)}",value=v)
       es.append(e)
@@ -189,13 +189,13 @@ class MemberSystem(commands.Cog):
     for p in permss:
       ps.append(p)
       if len(ps) == 10:
-        e = discord.Embed(title=f"{member.display_name}の所持する権限一覧 📒")
+        e = discord.Embed(title=f"{member.display_name}の所持する権限一覧 📒",color=self.cl["mb"])
         v = "\n".join(ps)
         e.add_field(name=f"❖ 権限数 : {len(permss)}",value=v)
         es.append(e)
         ps = []
     if len(ps) > 0:
-      e = discord.Embed(title=f"{member.display_name}の所持する権限一覧 📒")
+      e = discord.Embed(title=f"{member.display_name}の所持する権限一覧 📒",color=self.cl["mb"])
       v = "\n".join(ps)
       e.add_field(name=f"❖ 権限数 : {len(permss)}",value=v)
       es.append(e)
@@ -209,48 +209,48 @@ class MemberSystem(commands.Cog):
     if member == None:
       member = ctx.author
       if ('change_nickname', True) not in ctx.author.guild_permissions:
-        return await ctx.send("ニックネームを変更する権限が無いようです",delete_after=5.0)
+        return await ctx.send("⚠️ ニックネームを変更する権限が無いようです",delete_after=5.0)
     else:
       if ('manage_nicknames', True) not in ctx.author.guild_permissions:
-        return await ctx.send("ニックネームを変更する権限が無いようです",delete_after=5.0)
+        return await ctx.send("⚠️ ニックネームを変更する権限が無いようです",delete_after=5.0)
     before = member.display_name
     await member.edit(nick=name)
-    return await ctx.send(f"{member.name} さんのニックネームを '{before}' から '{name}' に変更しました",delete_after=10.0)
+    return await ctx.send(f"☑️ {member.name} さんのニックネームを '{before}' から '{name}' に変更しました",delete_after=10.0)
     
   @member.command(aliases=["vcmt"])
   @commands.has_permissions(mute_members=True)
   async def vcmute(self, ctx, member:discord.Member):
     await ctx.message.edit(delete_after=5.0)
     await member.edit(mute=True)
-    return await ctx.send(f"{member.display_name} さんをサーバーミュートしました",delete_after=10.0)
+    return await ctx.send(f"☑️ {member.display_name} さんをサーバーミュートしました",delete_after=10.0)
     
   @member.command(aliases=["vsmt"])
   @commands.has_permissions(deafen_members=True)
   async def vcspeakermute(self, ctx, member:discord.Member):
     await ctx.message.edit(delete_after=5.0)
     await member.edit(deafen=True)
-    return await ctx.send(f"{member.display_name} さんのスピーカーをサーバーミュートしました",delete_after=10.0)
+    return await ctx.send(f"☑️ {member.display_name} さんのスピーカーをサーバーミュートしました",delete_after=10.0)
     
   @member.command(aliases=["vcmv"])
   @commands.has_permissions(move_members=True)
   async def vcmove(self, ctx, channel:discord.VoiceChannel, member:discord.Member):
     await ctx.message.edit(delete_after=5.0)
     await member.move_to(channel)
-    return await ctx.send(f"{member.display_name} さんを {channel.name} に移動しました",delete_after=10.0)
+    return await ctx.send(f"☑️ {member.display_name} さんを {channel.name} に移動しました",delete_after=10.0)
    
   @member.command(aliases=["vumt"])
   @commands.has_permissions(mute_members=True)
   async def vcunmute(self, ctx, member:discord.Member):
     await ctx.message.edit(delete_after=5.0)
     await member.edit(mute=False)
-    return await ctx.send(f"{member.display_name} さんのミュートを解除しました",delete_after=10.0)
+    return await ctx.send(f"☑️ {member.display_name} さんのミュートを解除しました",delete_after=10.0)
     
   @member.command(aliases=["vusm"])
   @commands.has_permissions(deafen_members=True)
   async def vcunspeakermute(self, ctx, member:discord.Member):
     await ctx.message.edit(delete_after=5.0)
     await member.edit(deafen=False)
-    return await ctx.send(f"{member.display_name} さんのスピーカーミュートを解除しました",delete_after=10.0)
+    return await ctx.send(f"☑️ {member.display_name} さんのスピーカーミュートを解除しました",delete_after=10.0)
    
   @member.command(aliases=["adrl"])
   @commands.has_permissions(manage_roles=True)
@@ -258,12 +258,12 @@ class MemberSystem(commands.Cog):
     await ctx.message.edit(delete_after=5.0)
     if member == None: member = ctx.author
     if role.id in self.overroles:
-      e = discord.Embed(title="⚠️ 高階・VIP・警告役職は別途コマンドを使用してください")
+      e = discord.Embed(title="⚠️ 役員・VIP・警告ロールは別途コマンドを使用してください",color=self.cl["er"])
       e.add_field(name="💡 ヒント",value="以下のコマンドを使用しましょう！\n・`e:m warn`: 警告ロールを付与します\n・`e:m vip`: VIPロールを付与します\n・`e:m admin`: 高階ロールを付与します")
       e.set_author(name=f"To {ctx.author.display_name}",icon_url=ctx.author.avatar_url)
       return await ctx.send(embed=e,delete_after=5.0)
     await member.add_roles(role)
-    return await ctx.send(f"{member.display_name} さんにロール '{role.name}' を付与しました",delete_after=10.0)
+    return await ctx.send(f"☑️ {member.display_name} さんにロール '{role.name}' を付与しました",delete_after=10.0)
           
   @member.command(aliases=["rmrl"])
   @commands.has_permissions(manage_roles=True)
@@ -271,66 +271,54 @@ class MemberSystem(commands.Cog):
     await ctx.message.edit(delete_after=5.0)
     if member == None: member = ctx.author
     if role.id in self.overroles:
-      e = discord.Embed(title="⚠️ 高階・VIP・警告役職は別途コマンドを使用してください")
+      e = discord.Embed(title="⚠️ 役員・VIP・警告ロールは別途コマンドを使用してください",color=self.cl["er"])
       e.add_field(name="💡 ヒント",value="以下のコマンドを使用しましょう！\n・`e:m unwarn`: 警告ロールを剥奪します\n・`e:m unvip`: VIPロールを剥奪します\n・`e:m unadmin`: 高階ロールを付与します")
       e.set_author(name=f"To {ctx.author.display_name}",icon_url=ctx.author.avatar_url)
       return await ctx.send(embed=e,delete_after=5.0)
     await member.remove_roles(role)
-    return await ctx.send(f"{member.display_name} さんから役職 '{role.name}' を剥奪しました",delete_after=10.0)
+    return await ctx.send(f"☑️ {member.display_name} さんから役職 '{role.name}' を剥奪しました",delete_after=10.0)
           
   @member.command()
   @commands.has_permissions(manage_roles=True)
   async def mute(self, ctx, member:discord.Member, reason=None):
     await ctx.message.edit(delete_after=5.0)
-    if 785137663123914763 in [x.id for x in member.roles]:
-      return await ctx.send("⚠️ 既にミュート処分を受けているようですよ",delete_after=5.0)
-    role = ctx.guild.get_role(785137663123914763)
+    if self.overroles[0] in [x.id for x in member.roles]:
+      return await ctx.send("⚠️ 既にミュート処分を受けているようです",delete_after=5.0)
+    role = ctx.guild.get_role(self.overroles[0])
     await member.add_roles(role)
-    return await ctx.send(f"☑️ {member.display_name} さんに第5級処分 'ミュート' を行いました",delete_after=10.0)
+    return await ctx.send(f"☑️ {member.display_name} さんに 'ミュート処分' を行いました",delete_after=10.0)
     
   @member.command()
   @commands.has_permissions(manage_roles=True)
-  async def warn(self, ctx, member:discord.Member, warninglevel:int, reason=None):
+  async def warn(self, ctx, member:discord.Member, reason=None):
     await ctx.message.edit(delete_after=5.0)
-    wns = self.overroles[1:5]
-    wnr = ctx.guild.get_role(wns[warninglevel])
-    trs = [x.id for x in member.roles]
-    mrs = [x for x in trs if x in wns]
-    if len(mrs) == 1:
-      rmr = ctx.guild.get_role(mrs[0])
-      if wnr.id == rmr:
-        return await ctx.send("🚫 前回と同じ処分はできません！",delete_after=5.0)
-      await member.remove_roles(rmr)
+    wnr = ctx.guild.get_role(self.overroles[1])
+    if wnr.id in [x.id for x in member.roles]:
+      return await ctx.send("⚠️ 既に警告処分を受けているようです",delete_after=5.0)
     await member.add_roles(wnr)
-    wnl = [
-      "第4級処分 '**初等注意**'",
-      "第3級処分 '**一次警告**'",
-      "第2級処分 '**二次警告**'",
-      "第1級処分 '**三次警告**'"
-    ]
-    return await ctx.send(f"☑️ {member.display_name} さんに{wnl[warninglevel]} を行いました",delete_after=10.0)
+    return await ctx.send(f"☑️ {member.display_name} さんに '警告処分' を行いました",delete_after=10.0)
     
   @member.command()
   @commands.has_permissions(kick_members=True)
   async def kick(self, ctx, member:discord.Member, reason=None):
     await ctx.message.edit(delete_after=5.0)
     await member.kick(reason=reason)
-    return await ctx.send(f"☑️ {member.display_name} さんに特級処分 '追放' を行いました",delete_after=10.0)
+    return await ctx.send(f"☑️ {member.display_name} さんに '追放処分' を行いました",delete_after=10.0)
     
   @member.command()
   @commands.has_permissions(ban_members=True)
   async def ban(self, ctx, member:discord.Member, deletedays=0, reason=None):
     await ctx.message.edit(delete_after=5.0)
     await member.ban(reason=reason, delete_message_days=deletedays)
-    return await ctx.send(f"☑️ {member.display_name} さんに特級処分 '永久追放' を行いました",delete_after=10.0)
+    return await ctx.send(f"☑️ {member.display_name} さんに '永久追放処分' を行いました",delete_after=10.0)
     
   @member.command(aliases=["unmt"])
   @commands.has_permissions(manage_roles=True)
   async def unmute(self, ctx, member:discord.Member, reason=None):
     await ctx.message.edit(delete_after=5.0)
-    if 785137663123914763 not in [x.id for x in member.roles]:
-      return await ctx.send("⚠️ まだミュート処分を受けていないようですよ",delete_after=5.0)
-    role = ctx.guild.get_role(785137663123914763)
+    if self.overroles[0] not in [x.id for x in member.roles]:
+      return await ctx.send("⚠️ まだミュート処分を受けていないようです",delete_after=5.0)
+    role = ctx.guild.get_role(self.overroles[0])
     await member.remove_roles(role)
     return await ctx.send(f"☑️ {member.display_name} さんのミュート処分を解除しました",delete_after=10.0)
     
@@ -338,11 +326,9 @@ class MemberSystem(commands.Cog):
   @commands.has_permissions(manage_roles=True)
   async def unwarn(self, ctx, member:discord.Member, reason=None):
     await ctx.message.edit(delete_after=5.0)
-    rls = [x.id for x in member.roles]
-    wns = [x for x in rls if x in self.overroles[1:5]]
-    if len(wns) == 0:
+    if self.overroles[1] not in [x.id for x in member.roles]:
       return await ctx.send("⚠️ まだ警告処分を受けていないようです",delete_after=5.0)
-    role = ctx.guild.get_role(wns[0])
+    role = ctx.guild.get_role(self.overroles[1])
     await member.remove_roles(role)
     return await ctx.send(f"☑️ {member.display_name} さんの警告処分を解除しました",delete_after=10.0)
     
@@ -352,18 +338,18 @@ class MemberSystem(commands.Cog):
     await ctx.message.edit(delete_after=5.0)
     user = await self.bot.fetch_user(userid)
     await ctx.guild.unban(user, reason=reason)
-    return await ctx.send(f"☑️ {user.name} さんのBan処分を解除しました",delete_after=10.0)
+    return await ctx.send(f"☑️ {user.name} さんの永久追放処分を解除しました",delete_after=10.0)
     
   @member.command()
   @commands.has_permissions(manage_guild=True)
   async def vip(self, ctx, member:discord.Member, viplevel:int, reason=None):
     await ctx.message.edit(delete_after=5.0)
-    vps = self.overroles[5:7]
+    vps = self.overroles[2:4]
     vrl = ctx.guild.get_role(vps[viplevel])
     rls = [x.id for x in member.roles]
     mrs = [x for x in rls if x in vps]
     vs = ["銀のVIP","金のVIP"]
-    e = discord.Embed(title="⚠️ 認定前に確認します")
+    e = discord.Embed(title="⚠️ 認定前に確認します",color=self.cl["mb"])
     e.add_field(name="認定内容",value=f"```\n{member.display_name} <-- {vs[viplevel]}\n```")
     e.set_author(name=f"To {ctx.author.display_name}",icon_url=ctx.author.avatar_url)
     e.set_footer(text="認定しますか？ Y or N")
@@ -387,15 +373,12 @@ class MemberSystem(commands.Cog):
           
   @member.command(aliases=["admn"])
   @commands.has_permissions(administrator=True)
-  async def admin(self, ctx, member:discord.Member, adminlevel:int, reason=None):
+  async def admin(self, ctx, member:discord.Member, reason=None):
     await ctx.message.edit(delete_after=5.0)
-    ads = self.overroles[7:9]
-    arl = ctx.guild.get_role(ads[adminlevel])
+    arl = ctx.guild.get_role(self.overroles[4])
     rls = [x.id for x in member.roles]
-    mrs = [x for x in rls if x in ads]
-    ads = ["権限者","管理者"]
-    e = discord.Embed(title="⚠️ 任命前に確認します")
-    e.add_field(name="任命内容",value=f"```\n{member.display_name} <-- {ads[adminlevel]}\n```")
+    e = discord.Embed(title="⚠️ 任命前に確認します",color=self.cl["mb"])
+    e.add_field(name="任命内容",value=f"```\n{member.display_name} <-- 役員\n```")
     e.set_author(name=f"To {ctx.author.display_name}",icon_url=ctx.author.avatar_url)
     e.set_footer(text="任命しますか？ Y or N")
     em = await ctx.send(embed=e)
@@ -404,26 +387,23 @@ class MemberSystem(commands.Cog):
       await em.edit(delete_after=1.0)
       await m.edit(delete_after=1.0)
       if m.content == "Y":
-        if len(mrs) == 1:
-          if mrs[0] == arl.id:
-            return await ctx.send("🚫 前回と同じ任命はできません！",delete_after=5.0)
-          rmr = ctx.guild.get_role(mrs[0])
-          await member.remove_roles(rmr)
+        if arl.id in rls:
+          return await ctx.send("🚫 前回と同じ任命はできません！",delete_after=5.0)
         await member.add_roles(arl)
-        return await ctx.send(f"☑️ {member.display_name} さんを '{ads[adminlevel]}' に任命しました！",delete_after=10.0)
+        return await ctx.send(f"☑️ {member.display_name} さんを 'EDS役員' に任命しました！",delete_after=10.0)
       else:
         return await ctx.send("☑️ 任命を破棄しました",delete_after=5.0)
     except asyncio.TimeoutError:
-      return await ctx.send("☑️ 20秒以内に応答がなかった為、認定を破棄しました",delete_after=5.0)
+      return await ctx.send("☑️ 20秒以内に応答がなかった為、任命を破棄しました",delete_after=5.0)
     
   @member.command(aliases=["uvip"])
   @commands.has_permissions(manage_guild=True)
   async def unvip(self, ctx, member:discord.Member, reason=None):
     await ctx.message.edit(delete_after=5.0)
-    vps = self.overroles[5:7]
+    vps = self.overroles[2:4]
     rls = [x.id for x in member.roles]
     mrs = [x for x in rls if x in vps]
-    e = discord.Embed(title="⚠️ 剥奪前に確認します")
+    e = discord.Embed(title="⚠️ 剥奪前に確認します",color=self.cl["mb"])
     e.add_field(name="剥奪内容",value=f"```\n{member.display_name} --> VIP\n```")
     e.set_author(name=f"To {ctx.author.display_name}",icon_url=ctx.author.avatar_url)
     e.set_footer(text="剥奪しますか？ Y or N")
@@ -447,11 +427,10 @@ class MemberSystem(commands.Cog):
   @commands.has_permissions(administrator=True)
   async def unadmin(self, ctx, member:discord.Member, reason=None):
     await ctx.message.edit(delete_after=5.0)
-    ads = self.overroles[7:9]
+    adl = self.overroles[4]
     rls = [x.id for x in member.roles]
-    mrs = [x for x in rls if x in ads]
-    e = discord.Embed(title="⚠️ 剥奪前に確認します")
-    e.add_field(name="剥奪内容",value=f"```\n{member.display_name} --> 高階権限\n```")
+    e = discord.Embed(title="⚠️ 剥奪前に確認します",color=self.cl["mb"])
+    e.add_field(name="剥奪内容",value=f"```\n{member.display_name} --> 役員\n```")
     e.set_author(name=f"To {ctx.author.display_name}",icon_url=ctx.author.avatar_url)
     e.set_footer(text="剥奪しますか？ Y or N")
     em = await ctx.send(embed=e)
@@ -460,15 +439,15 @@ class MemberSystem(commands.Cog):
       await em.edit(delete_after=1.0)
       await m.edit(delete_after=1.0)
       if m.content == "Y":
-        if len(mrs) == 0:
-          return await ctx.send("🚫 権限者・管理者に任命されていないようです！",delete_after=5.0)
-        rmr = ctx.guild.get_role(mrs[0])
+        if adl.id not in rls:
+          return await ctx.send("🚫 役員に任命されていないようです！",delete_after=5.0)
+        rmr = ctx.guild.get_role(adl)
         await member.remove_roles(rmr)
-        return await ctx.send(f"☑️ {member.display_name} さんから 高階権限 を剥奪しました",delete_after=10.0)
+        return await ctx.send(f"☑️ {member.display_name} さんから 役員権限 を剥奪しました",delete_after=10.0)
       else:
-        return await ctx.send("☑️ 認定を破棄しました",delete_after=5.0)
+        return await ctx.send("☑️ 剥奪を破棄しました",delete_after=5.0)
     except asyncio.TimeoutError:
-      return await ctx.send("☑️ 20秒以内に応答がなかった為、認定を破棄しました",delete_after=5.0)         
+      return await ctx.send("☑️ 20秒以内に応答がなかった為、剥奪を破棄しました",delete_after=5.0)         
           
 def setup(bot):
   bot.add_cog(MemberSystem(bot))
