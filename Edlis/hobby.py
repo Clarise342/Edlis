@@ -50,20 +50,20 @@ class HobbySystem(commands.Cog):
   
   @commands.Cog.listener()
   async def on_message(self, msg):
-    if "×" in msg:
-      t = msg.split("×")
+    if "×" in msg.content:
+      t = msg.content.split("×")
       try: a, b = int(t[0]), int(t[1])
       except: return
       else:
         await msg.channel.send(str(a*b))
-    elif "+" in msg:
-      t = msg.split("")
+    elif "+" in msg.content:
+      t = msg.content.split("")
       try: a, b = int(t[0]), int(t[1])
       except: return
       else:
         await msg.channel.send(str(a+b))
-    elif "-" in msg:
-      t = msg.split("-")
+    elif "-" in msg.content:
+      t = msg.content.split("-")
       try: a, b = int(t[0]), int(t[1])
       except: return
       else:
