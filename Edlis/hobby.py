@@ -57,7 +57,7 @@ class HobbySystem(commands.Cog):
       else:
         await msg.channel.send(str(a*b))
     elif "+" in msg.content:
-      t = msg.content.split("")
+      t = msg.content.split("+")
       try: a, b = int(t[0]), int(t[1])
       except: return
       else:
