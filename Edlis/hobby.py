@@ -48,5 +48,26 @@ class HobbySystem(commands.Cog):
     elif 90 <= r < 100: m = ["大凶","非常に不味いです………"]
     return await ctx.send(f"あなたの運勢は… ||{m[0]}||です！\n{m[1]}")
   
+  @commands.Cog.listener()
+  async def on_message(self, msg):
+    if "×" in msg:
+      t = msg.split("×")
+      try: a, b = int(t[0]), int(t[1])
+      except: return
+      else:
+        await msg.channel.send(str(a*b))
+    elif "+" in msg:
+      t = msg.split("")
+      try: a, b = int(t[0]), int(t[1])
+      except: return
+      else:
+        await msg.channel.send(str(a+b))
+    elif "-" in msg:
+      t = msg.split("-")
+      try: a, b = int(t[0]), int(t[1])
+      except: return
+      else:
+        await msg.channel.send(str(a-b))
+  
 def setup(bot):
   bot.add_cog(HobbySystem(bot))
